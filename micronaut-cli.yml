@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: cat.aubricoc.xolis
+---
+testFramework: junit
+sourceLanguage: java
