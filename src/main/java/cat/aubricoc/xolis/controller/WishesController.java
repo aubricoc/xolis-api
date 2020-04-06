@@ -1,30 +1,34 @@
 package cat.aubricoc.xolis.controller;
 
 import cat.aubricoc.xolis.model.Wish;
+import cat.aubricoc.xolis.service.WishService;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.PathVariable;
+import io.micronaut.http.annotation.Post;
 
-import javax.annotation.Nullable;
-import java.util.Collections;
+import javax.inject.Inject;
 import java.util.List;
 
 @Controller("/wishes")
 public class WishesController {
 
+    @Inject
+    private WishService wishService;
+
     @Get
     public List<Wish> searchWishes() {
-        return Collections.singletonList(buildWish(null));
+        return wishService.search();
     }
 
     @Get("/{id}")
-    public Wish getWish(Long id) {
-        return buildWish(id);
+    public Wish getWish(@PathVariable String id) {
+        return wishService.getById(id);
     }
 
-    private Wish buildWish(@Nullable Long id) {
-        Wish wish = new Wish();
-        wish.setId(id != null ? id : 1L);
-        wish.setTitle("Xolís del Pallars");
-        return wish;
+    @Post
+    public void createWish(@Body Wish wish) {
+        wishService.create(wish);
     }
 }

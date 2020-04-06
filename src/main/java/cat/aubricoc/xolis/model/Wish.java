@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class Wish {
 
-    private Long id;
+    private String id;
     private String title;
 }
