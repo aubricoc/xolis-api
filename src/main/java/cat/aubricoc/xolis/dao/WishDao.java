@@ -33,6 +33,6 @@ public class WishDao {
     }
 
     public Wish getById(String id) {
-        return getCollection().find(Filters.eq("id", id)).first();
+        return getCollection().find(Filters.eq("_id", id)).first();
     }
 }

@@ -2,6 +2,8 @@ package cat.aubricoc.xolis.service;
 
 import cat.aubricoc.xolis.dao.WishDao;
 import cat.aubricoc.xolis.model.Wish;
+import cat.aubricoc.xolis.model.WishToCreate;
+import cat.aubricoc.xolis.utils.ConversionUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,7 +16,8 @@ public class WishService {
     @Inject
     private WishDao wishDao;
 
-    public void create(Wish wish) {
+    public void create(WishToCreate wishToCreate) {
+        Wish wish = ConversionUtils.convert(wishToCreate, Wish.class);
         wish.setId(UUID.randomUUID().toString());
         wishDao.create(wish);
     }
