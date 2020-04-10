@@ -1,6 +1,6 @@
-package cat.aubricoc.xolis.wish.dao;
+package cat.aubricoc.xolis.wishes.dao;
 
-import cat.aubricoc.xolis.wish.model.Wish;
+import cat.aubricoc.xolis.wishes.model.Wish;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;

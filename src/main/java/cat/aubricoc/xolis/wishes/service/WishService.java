@@ -1,9 +1,9 @@
-package cat.aubricoc.xolis.wish.service;
+package cat.aubricoc.xolis.wishes.service;
 
 import cat.aubricoc.xolis.utils.ConversionUtils;
-import cat.aubricoc.xolis.wish.dao.WishDao;
-import cat.aubricoc.xolis.wish.model.Wish;
-import cat.aubricoc.xolis.wish.model.WishToCreate;
+import cat.aubricoc.xolis.wishes.dao.WishDao;
+import cat.aubricoc.xolis.wishes.model.Wish;
+import cat.aubricoc.xolis.wishes.model.WishToCreate;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

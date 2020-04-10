@@ -1,4 +1,4 @@
-package cat.aubricoc.xolis.wish.model;
+package cat.aubricoc.xolis.wishes.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
