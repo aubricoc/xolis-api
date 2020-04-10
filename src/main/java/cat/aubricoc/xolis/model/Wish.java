@@ -6,5 +6,5 @@ import lombok.Data;
 public class Wish {
 
     private String id;
-    private String title;
+    private String name;
 }
