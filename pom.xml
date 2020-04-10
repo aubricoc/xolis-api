@@ -69,6 +69,10 @@
             <artifactId>micronaut-http-client</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-security-jwt</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.micronaut.configuration</groupId>
             <artifactId>micronaut-mongo-sync</artifactId>
         </dependency>

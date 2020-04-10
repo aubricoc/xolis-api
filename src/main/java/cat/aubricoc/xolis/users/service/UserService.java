@@ -1,6 +1,7 @@
 package cat.aubricoc.xolis.users.service;
 
 import cat.aubricoc.xolis.common.utils.ConversionUtils;
+import cat.aubricoc.xolis.common.utils.PasswordUtils;
 import cat.aubricoc.xolis.users.dao.UserDao;
 import cat.aubricoc.xolis.users.model.User;
 import cat.aubricoc.xolis.users.model.UserToCreate;
@@ -22,6 +23,12 @@ public class UserService {
     public void create(UserToCreate userToCreate) {
         User user = ConversionUtils.convert(userToCreate, User.class);
         user.setId(UUID.randomUUID().toString());
+        user.setPassword(PasswordUtils.encode(userToCreate.getPassword()));
         userDao.create(user);
+    }
+
+    public boolean isUserValid(String username, String password) {
+        String encodedPassword = PasswordUtils.encode(password);
+        return userDao.existsByUsernameAndPassword(username, encodedPassword);
     }
 }

@@ -1,5 +1,18 @@
 micronaut:
   application:
     name: xolis-api
+  security:
+    enabled: true
+    endpoints:
+      login:
+        enabled: true
+    token:
+      jwt:
+        enabled: true
+        signatures:
+          secret:
+            generator:
+              secret: sxeoclriest__$XXXUXXUX:__0173t54525
+              jws-algorithm: HS256
 mongodb:
   uri: mongodb+srv://xolis-api:O7xbZ15YRrGLkDH4@camprodon-4d43e.gcp.mongodb.net/xolis?retryWrites=true&w=majority

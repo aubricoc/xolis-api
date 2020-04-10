@@ -20,7 +20,7 @@ public abstract class Dao<T> {
         this.type = type;
     }
 
-    private MongoCollection<T> getCollection() {
+    protected MongoCollection<T> getCollection() {
         MongoDatabase database = client.getDatabase("xolis");
         return database.getCollection(collectionName, type);
     }
