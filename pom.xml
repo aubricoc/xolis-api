@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cat.aubricoc.xolis</groupId>
     <artifactId>xolis-api</artifactId>
@@ -12,7 +12,7 @@
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <exec.mainClass>cat.aubricoc.xolis.Application</exec.mainClass>
+        <exec.mainClass>cat.aubricoc.xolis.XolisApplication</exec.mainClass>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
     </properties>
@@ -35,6 +35,20 @@
     </dependencyManagement>
     <dependencies>
         <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.4</version>
+        </dependency>
+        <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject</artifactId>
         </dependency>
@@ -45,10 +59,6 @@
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-runtime</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
@@ -63,21 +73,10 @@
             <artifactId>micronaut-mongo-sync</artifactId>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.9.4</version>
-        </dependency>
-        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -110,11 +109,11 @@
                         <configuration>
                             <transformers>
                                 <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>${exec.mainClass}</mainClass>
                                 </transformer>
                                 <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                    implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                             </transformers>
                         </configuration>
                     </execution>
@@ -128,7 +127,7 @@
                     <executable>java</executable>
                     <arguments>
                         <argument>-classpath</argument>
-                        <classpath/>
+                        <classpath />
                         <argument>-noverify</argument>
                         <argument>-XX:TieredStopAtLevel=1</argument>
                         <argument>-Dcom.sun.management.jmxremote</argument>
@@ -172,11 +171,6 @@
                             <arg>-parameters</arg>
                         </compilerArgs>
                         <annotationProcessorPaths>
-                            <path>
-                                <groupId>org.projectlombok</groupId>
-                                <artifactId>lombok</artifactId>
-                                <version>1.18.12</version>
-                            </path>
                             <path>
                                 <groupId>io.micronaut</groupId>
                                 <artifactId>micronaut-inject-java</artifactId>

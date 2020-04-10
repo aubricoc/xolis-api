@@ -1,8 +1,8 @@
-package cat.aubricoc.xolis.controller;
+package cat.aubricoc.xolis.wish.controller;
 
-import cat.aubricoc.xolis.model.Wish;
-import cat.aubricoc.xolis.model.WishToCreate;
-import cat.aubricoc.xolis.service.WishService;
+import cat.aubricoc.xolis.wish.model.Wish;
+import cat.aubricoc.xolis.wish.model.WishToCreate;
+import cat.aubricoc.xolis.wish.service.WishService;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
