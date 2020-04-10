@@ -7,15 +7,20 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 @Controller("/users")
 public class UsersController {
 
+    private final UserService userService;
+
     @Inject
-    private UserService userService;
+    public UsersController(UserService userService) {
+        this.userService = userService;
+    }
 
     @Post
-    public void createUser(@Body UserToCreate user) {
+    public void createUser(@Valid @Body UserToCreate user) {
         userService.create(user);
     }
 }

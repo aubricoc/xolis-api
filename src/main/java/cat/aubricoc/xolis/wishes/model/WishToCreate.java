@@ -3,8 +3,11 @@ package cat.aubricoc.xolis.wishes.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.validation.constraints.NotEmpty;
+
 public class WishToCreate {
 
+    @NotEmpty
     private String name;
 
     public String getName() {

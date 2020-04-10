@@ -3,8 +3,11 @@ package cat.aubricoc.xolis.users.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.validation.constraints.NotEmpty;
+
 public class UserToCreate {
 
+    @NotEmpty
     private String username;
 
     public String getUsername() {

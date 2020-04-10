@@ -18,8 +18,8 @@
     </properties>
     <repositories>
         <repository>
-            <id>jcenter.bintray.com</id>
-            <url>https://jcenter.bintray.com</url>
+            <id>Maven Central Repository</id>
+            <url>https://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
     <dependencyManagement>
@@ -71,6 +71,10 @@
         <dependency>
             <groupId>io.micronaut.configuration</groupId>
             <artifactId>micronaut-mongo-sync</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.configuration</groupId>
+            <artifactId>micronaut-hibernate-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

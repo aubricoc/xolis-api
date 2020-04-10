@@ -12,8 +12,12 @@ import java.util.UUID;
 @Singleton
 public class UserService {
 
+    private final UserDao userDao;
+
     @Inject
-    private UserDao userDao;
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public void create(UserToCreate userToCreate) {
         User user = ConversionUtils.convert(userToCreate, User.class);

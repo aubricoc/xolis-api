@@ -2,13 +2,16 @@ package cat.aubricoc.xolis.users.dao;
 
 import cat.aubricoc.xolis.common.dao.Dao;
 import cat.aubricoc.xolis.users.model.User;
+import com.mongodb.client.MongoClient;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public class UserDao extends Dao<User> {
 
-    public UserDao() {
-        super("users", User.class);
+    @Inject
+    public UserDao(MongoClient client) {
+        super(client, "users", User.class);
     }
 }

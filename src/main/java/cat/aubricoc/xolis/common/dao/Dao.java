@@ -5,18 +5,17 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Dao<T> {
 
+    private final MongoClient client;
     private final String collectionName;
     private final Class<T> type;
-    @Inject
-    private MongoClient client;
 
-    protected Dao(String collectionName, Class<T> type) {
+    protected Dao(MongoClient client, String collectionName, Class<T> type) {
+        this.client = client;
         this.collectionName = collectionName;
         this.type = type;
     }

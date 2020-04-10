@@ -13,8 +13,12 @@ import java.util.UUID;
 @Singleton
 public class WishService {
 
+    private final WishDao wishDao;
+
     @Inject
-    private WishDao wishDao;
+    public WishService(WishDao wishDao) {
+        this.wishDao = wishDao;
+    }
 
     public void create(WishToCreate wishToCreate) {
         Wish wish = ConversionUtils.convert(wishToCreate, Wish.class);

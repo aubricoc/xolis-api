@@ -10,13 +10,18 @@ import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.annotation.Post;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller("/wishes")
 public class WishesController {
 
+    private final WishService wishService;
+
     @Inject
-    private WishService wishService;
+    public WishesController(WishService wishService) {
+        this.wishService = wishService;
+    }
 
     @Get
     public List<Wish> searchWishes() {
@@ -29,7 +34,7 @@ public class WishesController {
     }
 
     @Post
-    public void createWish(@Body WishToCreate wish) {
+    public void createWish(@Valid @Body WishToCreate wish) {
         wishService.create(wish);
     }
 }
