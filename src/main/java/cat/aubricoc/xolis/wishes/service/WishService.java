@@ -1,6 +1,6 @@
 package cat.aubricoc.xolis.wishes.service;
 
-import cat.aubricoc.xolis.utils.ConversionUtils;
+import cat.aubricoc.xolis.common.utils.ConversionUtils;
 import cat.aubricoc.xolis.wishes.dao.WishDao;
 import cat.aubricoc.xolis.wishes.model.Wish;
 import cat.aubricoc.xolis.wishes.model.WishToCreate;

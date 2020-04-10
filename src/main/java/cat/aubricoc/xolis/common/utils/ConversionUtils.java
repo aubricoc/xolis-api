@@ -1,4 +1,4 @@
-package cat.aubricoc.xolis.utils;
+package cat.aubricoc.xolis.common.utils;
 
 import org.apache.commons.beanutils.BeanUtils;
 
