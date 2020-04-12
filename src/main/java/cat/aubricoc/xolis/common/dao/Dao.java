@@ -4,6 +4,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,5 +38,16 @@ public abstract class Dao<T> {
 
     public T getById(String id) {
         return getCollection().find(Filters.eq("_id", id)).first();
+    }
+
+    protected long count(Bson... filters) {
+        if (filters == null || filters.length == 0) {
+            return getCollection().countDocuments();
+        }
+        return getCollection().countDocuments(Filters.and(filters));
+    }
+
+    protected boolean exists(Bson... filters) {
+        return count(filters) > 0;
     }
 }

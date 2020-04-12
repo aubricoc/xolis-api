@@ -16,9 +16,12 @@ public class UserDao extends Dao<User> {
         super(client, "users", User.class);
     }
 
+    public boolean existsByUsername(String username) {
+        return exists(Filters.eq("username", username));
+    }
+
     public boolean existsByUsernameAndPassword(String username, String password) {
-        return getCollection().countDocuments(Filters.and(
-                Filters.eq("username", username),
-                Filters.eq("password", password))) > 0;
+        return exists(Filters.eq("username", username),
+                Filters.eq("password", password));
     }
 }

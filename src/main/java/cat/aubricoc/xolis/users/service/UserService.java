@@ -1,5 +1,6 @@
 package cat.aubricoc.xolis.users.service;
 
+import cat.aubricoc.xolis.common.exception.ConflictException;
 import cat.aubricoc.xolis.common.utils.ConversionUtils;
 import cat.aubricoc.xolis.common.utils.PasswordUtils;
 import cat.aubricoc.xolis.users.dao.UserDao;
@@ -21,6 +22,9 @@ public class UserService {
     }
 
     public void create(UserToCreate userToCreate) {
+        if (userDao.existsByUsername(userToCreate.getUsername())) {
+            throw new ConflictException("Username is already used");
+        }
         User user = ConversionUtils.convert(userToCreate, User.class);
         user.setId(UUID.randomUUID().toString());
         user.setPassword(PasswordUtils.encode(userToCreate.getPassword()));

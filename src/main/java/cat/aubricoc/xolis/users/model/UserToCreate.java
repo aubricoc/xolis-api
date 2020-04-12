@@ -4,14 +4,14 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 public class UserToCreate {
 
     @NotEmpty
+    @Pattern(regexp = "^[a-zA-Z0-9_]*$")
     private String username;
     @NotEmpty
-    @Size(min = 8)
     private String password;
 
     public String getUsername() {
