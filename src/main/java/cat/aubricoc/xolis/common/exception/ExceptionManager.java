@@ -1,7 +1,9 @@
 package cat.aubricoc.xolis.common.exception;
 
+import cat.aubricoc.xolis.common.utils.HttpUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.server.exceptions.ExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,9 @@ public class ExceptionManager implements ExceptionHandler<ClientErrorException, 
 
     @Override
     public HttpResponse<?> handle(HttpRequest request, ClientErrorException exception) {
-        LOG.warn("Error on request: " + request.getMethodName() + " " + request.getPath(), exception);
-        return HttpResponse.status(exception.getHttpStatus(), exception.getMessage());
+        HttpStatus httpStatus = exception.getHttpStatus();
+        String endpoint = HttpUtils.getEndpoint(request);
+        LOG.warn("Client Error ({}) on request: {}", httpStatus, endpoint, exception);
+        return HttpResponse.status(httpStatus, exception.getMessage());
     }
 }
