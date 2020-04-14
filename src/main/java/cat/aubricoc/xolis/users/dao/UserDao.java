@@ -20,8 +20,11 @@ public class UserDao extends Dao<User> {
         return exists(Filters.eq("username", username));
     }
 
-    public boolean existsByUsernameAndPassword(String username, String password) {
-        return exists(Filters.eq("username", username),
-                Filters.eq("password", password));
+    public boolean existsByEmail(String email) {
+        return exists(Filters.eq("email", email));
+    }
+
+    public User getByUsernameOrEmail(String usernameOrEmail) {
+        return getBy(Filters.or(Filters.eq("username", usernameOrEmail), Filters.eq("email", usernameOrEmail)));
     }
 }

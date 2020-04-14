@@ -2,6 +2,9 @@ package cat.aubricoc.xolis.common.exception;
 
 import io.micronaut.http.HttpStatus;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ClientErrorException extends RuntimeException {
 
     private final HttpStatus httpStatus;
@@ -13,5 +16,11 @@ public class ClientErrorException extends RuntimeException {
 
     public HttpStatus getHttpStatus() {
         return httpStatus;
+    }
+
+    public Map<String, Object> toResponse() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", getMessage());
+        return response;
     }
 }

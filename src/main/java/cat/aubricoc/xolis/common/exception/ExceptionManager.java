@@ -19,7 +19,7 @@ public class ExceptionManager implements ExceptionHandler<ClientErrorException, 
     public HttpResponse<?> handle(HttpRequest request, ClientErrorException exception) {
         HttpStatus httpStatus = exception.getHttpStatus();
         String endpoint = HttpUtils.getEndpoint(request);
-        LOG.warn("Client Error ({}) on request: {}", httpStatus, endpoint, exception);
-        return HttpResponse.status(httpStatus, exception.getMessage());
+        LOG.warn("Client Error ({}) on request {} : {}", httpStatus, endpoint, exception.getMessage());
+        return HttpResponse.status(httpStatus).body(exception.toResponse());
     }
 }

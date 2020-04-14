@@ -40,7 +40,14 @@ public abstract class Dao<T> {
         return getCollection().find(Filters.eq("_id", id)).first();
     }
 
-    protected long count(Bson... filters) {
+    protected T getBy(Bson... filters) {
+        if (filters == null || filters.length == 0) {
+            return getCollection().find().first();
+        }
+        return getCollection().find(Filters.and(filters)).first();
+    }
+
+    protected long countBy(Bson... filters) {
         if (filters == null || filters.length == 0) {
             return getCollection().countDocuments();
         }
@@ -48,6 +55,6 @@ public abstract class Dao<T> {
     }
 
     protected boolean exists(Bson... filters) {
-        return count(filters) > 0;
+        return countBy(filters) > 0;
     }
 }
