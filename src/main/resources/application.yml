@@ -16,5 +16,7 @@ micronaut:
             generator:
               secret: sxeoclriest__$XXXUXXUX:__0173t54525
               jws-algorithm: HS256
+        generator:
+          access-token-expiration: 3600
 mongodb:
   uri: mongodb+srv://xolis-api:O7xbZ15YRrGLkDH4@camprodon-4d43e.gcp.mongodb.net/xolis?retryWrites=true&w=majority
