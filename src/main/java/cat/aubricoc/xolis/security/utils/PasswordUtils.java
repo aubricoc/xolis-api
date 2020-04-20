@@ -1,4 +1,4 @@
-package cat.aubricoc.xolis.common.utils;
+package cat.aubricoc.xolis.security.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

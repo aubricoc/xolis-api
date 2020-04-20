@@ -1,7 +1,7 @@
 package cat.aubricoc.xolis.script.controller;
 
-import cat.aubricoc.xolis.common.security.Role;
 import cat.aubricoc.xolis.script.service.ScriptService;
+import cat.aubricoc.xolis.security.Role;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.security.annotation.Secured;

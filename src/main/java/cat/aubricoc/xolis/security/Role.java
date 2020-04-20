@@ -1,4 +1,4 @@
-package cat.aubricoc.xolis.common.security;
+package cat.aubricoc.xolis.security;
 
 public class Role {
 

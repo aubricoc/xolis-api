@@ -1,6 +1,6 @@
 package cat.aubricoc.xolis.wishes.controller;
 
-import cat.aubricoc.xolis.common.security.Role;
+import cat.aubricoc.xolis.security.Role;
 import cat.aubricoc.xolis.wishes.model.Wish;
 import cat.aubricoc.xolis.wishes.model.WishToCreate;
 import cat.aubricoc.xolis.wishes.service.WishService;

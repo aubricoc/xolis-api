@@ -1,27 +1,29 @@
 package cat.aubricoc.xolis.script.service;
 
-import cat.aubricoc.xolis.users.dao.UserDao;
+import cat.aubricoc.xolis.security.service.AuthService;
+import cat.aubricoc.xolis.wishes.dao.WishDao;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Date;
 
 @Singleton
 public class ScriptService {
 
-    private final UserDao userDao;
+    private final WishDao wishDao;
+    private final AuthService authService;
 
     @Inject
-    public ScriptService(UserDao userDao) {
-        this.userDao = userDao;
+    public ScriptService(WishDao wishDao, AuthService authService) {
+        this.wishDao = wishDao;
+        this.authService = authService;
     }
 
     public void run() {
-        userDao.search().stream()
-                .filter(user -> user.getCreated() == null)
-                .forEach(user -> {
-                    user.setCreated(new Date());
-                    userDao.update(user);
+        wishDao.search().stream()
+                .filter(wish -> wish.getUserId() == null)
+                .forEach(wish -> {
+                    wish.setUserId(authService.getUserId());
+                    wishDao.update(wish);
                 });
     }
 }

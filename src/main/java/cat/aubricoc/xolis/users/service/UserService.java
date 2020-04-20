@@ -1,29 +1,19 @@
 package cat.aubricoc.xolis.users.service;
 
 import cat.aubricoc.xolis.common.exception.ConflictException;
-import cat.aubricoc.xolis.common.security.Role;
 import cat.aubricoc.xolis.common.utils.ConversionUtils;
-import cat.aubricoc.xolis.common.utils.PasswordUtils;
+import cat.aubricoc.xolis.security.utils.PasswordUtils;
 import cat.aubricoc.xolis.users.dao.UserDao;
 import cat.aubricoc.xolis.users.model.User;
 import cat.aubricoc.xolis.users.model.UserToCreate;
-import io.micronaut.security.authentication.AuthenticationFailed;
-import io.micronaut.security.authentication.AuthenticationFailureReason;
-import io.micronaut.security.authentication.AuthenticationResponse;
-import io.micronaut.security.authentication.UserDetails;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Singleton
 public class UserService {
-
-    private static final String ADMIN = "aubricoc";
 
     private final UserDao userDao;
 
@@ -44,25 +34,5 @@ public class UserService {
         user.setPassword(PasswordUtils.encode(userToCreate.getPassword()));
         user.setCreated(new Date());
         userDao.create(user);
-    }
-
-    public AuthenticationResponse validateUserAuth(String usernameOrEmail, String password) {
-        User user = userDao.getByUsernameOrEmail(usernameOrEmail);
-        if (user == null) {
-            return new AuthenticationFailed(AuthenticationFailureReason.USER_NOT_FOUND);
-        }
-        String encodedPassword = PasswordUtils.encode(password);
-        if (!user.getPassword().equals(encodedPassword)) {
-            return new AuthenticationFailed(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH);
-        }
-        String username = user.getUsername();
-        return new UserDetails(username, getRoles(username));
-    }
-
-    private List<String> getRoles(String username) {
-        if (ADMIN.equals(username)) {
-            return Arrays.asList(Role.USER, Role.ADMIN);
-        }
-        return Collections.singletonList(Role.USER);
     }
 }

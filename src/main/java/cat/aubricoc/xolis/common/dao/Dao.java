@@ -12,6 +12,7 @@ import java.util.List;
 
 public abstract class Dao<T extends Identified> {
 
+    public static final String DATABASE_NAME = "xolis";
     private final MongoClient client;
     private final String collectionName;
     private final Class<T> type;
@@ -23,7 +24,7 @@ public abstract class Dao<T extends Identified> {
     }
 
     protected MongoCollection<T> getCollection() {
-        MongoDatabase database = client.getDatabase("xolis");
+        MongoDatabase database = client.getDatabase(DATABASE_NAME);
         return database.getCollection(collectionName, type);
     }
 
