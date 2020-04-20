@@ -1,6 +1,7 @@
 package cat.aubricoc.xolis.wishes.model;
 
 import cat.aubricoc.xolis.common.model.Identified;
+import cat.aubricoc.xolis.users.model.User;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -11,6 +12,7 @@ public class Wish extends Identified {
     private String name;
     private String userId;
     private Date created;
+    private User user;
 
     public String getName() {
         return name;
@@ -34,6 +36,14 @@ public class Wish extends Identified {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

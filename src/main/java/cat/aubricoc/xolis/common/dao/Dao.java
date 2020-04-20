@@ -4,6 +4,7 @@ import cat.aubricoc.xolis.common.model.Identified;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.Filters;
 import org.bson.conversions.Bson;
 
@@ -37,13 +38,17 @@ public abstract class Dao<T extends Identified> {
     }
 
     public List<T> search() {
-        List<T> list = new ArrayList<>();
-        getCollection().find().forEach(list::add);
-        return list;
+        return toList(getCollection().find());
     }
 
     public T getById(String id) {
         return getCollection().find(getFilterById(id)).first();
+    }
+
+    protected List<T> toList(MongoIterable<T> iterable) {
+        List<T> list = new ArrayList<>();
+        iterable.forEach(list::add);
+        return list;
     }
 
     protected T getBy(Bson... filters) {
