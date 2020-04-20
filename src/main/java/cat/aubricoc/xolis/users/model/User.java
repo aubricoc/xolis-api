@@ -1,22 +1,17 @@
 package cat.aubricoc.xolis.users.model;
 
+import cat.aubricoc.xolis.common.model.Identified;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class User {
+import java.util.Date;
 
-    private String id;
+public class User extends Identified {
+
     private String username;
     private String email;
     private String password;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private Date created;
 
     public String getUsername() {
         return username;
@@ -40,6 +35,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     @Override

@@ -14,11 +14,16 @@ import io.micronaut.security.authentication.UserDetails;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Singleton
 public class UserService {
+
+    private static final String ADMIN = "aubricoc";
 
     private final UserDao userDao;
 
@@ -37,6 +42,7 @@ public class UserService {
         User user = ConversionUtils.convert(userToCreate, User.class);
         user.setId(UUID.randomUUID().toString());
         user.setPassword(PasswordUtils.encode(userToCreate.getPassword()));
+        user.setCreated(new Date());
         userDao.create(user);
     }
 
@@ -49,6 +55,14 @@ public class UserService {
         if (!user.getPassword().equals(encodedPassword)) {
             return new AuthenticationFailed(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH);
         }
-        return new UserDetails(user.getUsername(), Collections.singletonList(Role.USER));
+        String username = user.getUsername();
+        return new UserDetails(username, getRoles(username));
+    }
+
+    private List<String> getRoles(String username) {
+        if (ADMIN.equals(username)) {
+            return Arrays.asList(Role.USER, Role.ADMIN);
+        }
+        return Collections.singletonList(Role.USER);
     }
 }

@@ -1,19 +1,18 @@
-package cat.aubricoc.xolis.wishes.model;
+package cat.aubricoc.xolis.common.model;
 
-import cat.aubricoc.xolis.common.model.Identified;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Wish extends Identified {
+public class Identified {
 
-    private String name;
+    private String id;
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

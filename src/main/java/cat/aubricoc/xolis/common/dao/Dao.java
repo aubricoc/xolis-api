@@ -1,5 +1,6 @@
 package cat.aubricoc.xolis.common.dao;
 
+import cat.aubricoc.xolis.common.model.Identified;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -9,7 +10,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Dao<T> {
+public abstract class Dao<T extends Identified> {
 
     private final MongoClient client;
     private final String collectionName;
@@ -30,6 +31,10 @@ public abstract class Dao<T> {
         getCollection().insertOne(object);
     }
 
+    public void update(T object) {
+        getCollection().replaceOne(getFilterById(object.getId()), object);
+    }
+
     public List<T> search() {
         List<T> list = new ArrayList<>();
         getCollection().find().forEach(list::add);
@@ -37,7 +42,7 @@ public abstract class Dao<T> {
     }
 
     public T getById(String id) {
-        return getCollection().find(Filters.eq("_id", id)).first();
+        return getCollection().find(getFilterById(id)).first();
     }
 
     protected T getBy(Bson... filters) {
@@ -56,5 +61,9 @@ public abstract class Dao<T> {
 
     protected boolean exists(Bson... filters) {
         return countBy(filters) > 0;
+    }
+
+    private Bson getFilterById(String id) {
+        return Filters.eq("_id", id);
     }
 }
