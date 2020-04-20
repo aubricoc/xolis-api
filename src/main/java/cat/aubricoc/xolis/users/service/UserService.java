@@ -4,7 +4,7 @@ import cat.aubricoc.xolis.common.exception.ConflictException;
 import cat.aubricoc.xolis.common.utils.ConversionUtils;
 import cat.aubricoc.xolis.security.utils.PasswordUtils;
 import cat.aubricoc.xolis.users.dao.UserDao;
-import cat.aubricoc.xolis.users.model.User;
+import cat.aubricoc.xolis.users.model.UserDoc;
 import cat.aubricoc.xolis.users.model.UserToCreate;
 
 import javax.inject.Inject;
@@ -29,10 +29,10 @@ public class UserService {
         if (userDao.existsByEmail(userToCreate.getEmail())) {
             throw new ConflictException("email", "Email is already used");
         }
-        User user = ConversionUtils.convert(userToCreate, User.class);
-        user.setId(UUID.randomUUID().toString());
-        user.setPassword(PasswordUtils.encode(userToCreate.getPassword()));
-        user.setCreated(new Date());
-        userDao.create(user);
+        UserDoc userDoc = ConversionUtils.convert(userToCreate, UserDoc.class);
+        userDoc.setId(UUID.randomUUID().toString());
+        userDoc.setPassword(PasswordUtils.encode(userToCreate.getPassword()));
+        userDoc.setCreated(new Date());
+        userDao.create(userDoc);
     }
 }

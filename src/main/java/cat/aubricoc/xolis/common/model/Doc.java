@@ -3,7 +3,7 @@ package cat.aubricoc.xolis.common.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Identified {
+public class Doc {
 
     private String id;
 

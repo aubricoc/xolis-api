@@ -3,7 +3,7 @@ package cat.aubricoc.xolis.security.service;
 import cat.aubricoc.xolis.security.Role;
 import cat.aubricoc.xolis.security.utils.PasswordUtils;
 import cat.aubricoc.xolis.users.dao.UserDao;
-import cat.aubricoc.xolis.users.model.User;
+import cat.aubricoc.xolis.users.model.UserDoc;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.authentication.AuthenticationFailed;
@@ -51,21 +51,21 @@ public class AuthService implements AuthenticationProvider {
     }
 
     private AuthenticationResponse validateUserAuth(String usernameOrEmail, String password) {
-        User user = userDao.getByUsernameOrEmail(usernameOrEmail);
-        if (user == null) {
+        UserDoc userDoc = userDao.getByUsernameOrEmail(usernameOrEmail);
+        if (userDoc == null) {
             return new AuthenticationFailed(AuthenticationFailureReason.USER_NOT_FOUND);
         }
         String encodedPassword = PasswordUtils.encode(password);
-        if (!user.getPassword().equals(encodedPassword)) {
+        if (!userDoc.getPassword().equals(encodedPassword)) {
             return new AuthenticationFailed(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH);
         }
-        String username = user.getUsername();
-        return new UserDetails(username, getRoles(username), buildAttributes(user));
+        String username = userDoc.getUsername();
+        return new UserDetails(username, getRoles(username), buildAttributes(userDoc));
     }
 
-    private Map<String, Object> buildAttributes(User user) {
+    private Map<String, Object> buildAttributes(UserDoc userDoc) {
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put(ATTRIBUTE_USER_ID, user.getId());
+        attributes.put(ATTRIBUTE_USER_ID, userDoc.getId());
         return attributes;
     }
 

@@ -1,6 +1,6 @@
 package cat.aubricoc.xolis.common.dao;
 
-import cat.aubricoc.xolis.common.model.Identified;
+import cat.aubricoc.xolis.common.model.Doc;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -11,7 +11,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Dao<T extends Identified> {
+public abstract class Dao<T extends Doc> {
 
     public static final String DATABASE_NAME = "xolis";
     private final MongoClient client;

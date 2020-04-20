@@ -4,6 +4,7 @@ import cat.aubricoc.xolis.common.utils.ConversionUtils;
 import cat.aubricoc.xolis.security.service.AuthService;
 import cat.aubricoc.xolis.wishes.dao.WishDao;
 import cat.aubricoc.xolis.wishes.model.Wish;
+import cat.aubricoc.xolis.wishes.model.WishDoc;
 import cat.aubricoc.xolis.wishes.model.WishToCreate;
 
 import javax.inject.Inject;
@@ -25,18 +26,18 @@ public class WishService {
     }
 
     public void create(WishToCreate wishToCreate) {
-        Wish wish = ConversionUtils.convert(wishToCreate, Wish.class);
-        wish.setId(UUID.randomUUID().toString());
-        wish.setCreated(new Date());
-        wish.setUserId(authService.getUserId());
-        wishDao.create(wish);
+        WishDoc wishDoc = ConversionUtils.convert(wishToCreate, WishDoc.class);
+        wishDoc.setId(UUID.randomUUID().toString());
+        wishDoc.setCreated(new Date());
+        wishDoc.setUserId(authService.getUserId());
+        wishDao.create(wishDoc);
     }
 
     public List<Wish> search() {
-        return wishDao.search();
+        return ConversionUtils.convert(wishDao.search(), Wish.class);
     }
 
     public Wish getById(String id) {
-        return wishDao.getById(id);
+        return ConversionUtils.convert(wishDao.getById(id), Wish.class);
     }
 }
