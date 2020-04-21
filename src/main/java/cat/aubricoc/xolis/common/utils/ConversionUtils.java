@@ -1,5 +1,6 @@
 package cat.aubricoc.xolis.common.utils;
 
+import cat.aubricoc.xolis.common.model.SearchResult;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import javax.annotation.Nonnull;
@@ -39,6 +40,16 @@ public class ConversionUtils {
         return from.stream()
                 .map(item -> convert(item, toClass))
                 .collect(Collectors.toList());
+    }
+
+    public static <T> SearchResult<T> convert(@Nullable SearchResult<?> from, Class<T> toClass) {
+        if (from == null) {
+            return null;
+        }
+        SearchResult<T> result = new SearchResult<>();
+        result.setMetadata(from.getMetadata());
+        result.setData(convert(from.getData(), toClass));
+        return result;
     }
 
     private static void fillAllFields(@Nonnull Object from, @Nonnull Object to) throws IllegalAccessException {

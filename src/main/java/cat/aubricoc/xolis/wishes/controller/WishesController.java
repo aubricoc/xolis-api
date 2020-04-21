@@ -1,9 +1,12 @@
 package cat.aubricoc.xolis.wishes.controller;
 
+import cat.aubricoc.xolis.common.model.PaginatedSearch;
+import cat.aubricoc.xolis.common.utils.HttpUtils;
 import cat.aubricoc.xolis.security.Role;
 import cat.aubricoc.xolis.wishes.model.Wish;
 import cat.aubricoc.xolis.wishes.model.WishToCreate;
 import cat.aubricoc.xolis.wishes.service.WishService;
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
@@ -28,10 +31,10 @@ public class WishesController {
         this.wishService = wishService;
     }
 
-    @Get
+    @Get("{?search*}")
     @Secured(SecurityRule.IS_ANONYMOUS)
-    public List<Wish> searchWishes() {
-        return wishService.search();
+    public HttpResponse<List<Wish>> searchWishes(@Valid PaginatedSearch search) {
+        return HttpUtils.buildResponse(wishService.search(search));
     }
 
     @Get("/{id}")
