@@ -4,10 +4,13 @@ import cat.aubricoc.xolis.users.model.User;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.time.ZonedDateTime;
+
 public class Wish {
 
     private String id;
     private String name;
+    private ZonedDateTime created;
     private User user;
 
     public String getId() {
@@ -24,6 +27,14 @@ public class Wish {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ZonedDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(ZonedDateTime created) {
+        this.created = created;
     }
 
     public User getUser() {

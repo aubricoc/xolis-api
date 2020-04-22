@@ -7,7 +7,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +27,9 @@ public class ConversionUtils {
         }
         if (toClass.isInstance(from)) {
             return toClass.cast(from);
+        }
+        if (toClass == ZonedDateTime.class && from instanceof Date) {
+            return toClass.cast(convertToZonedDateTime((Date) from));
         }
         try {
             T to = toClass.getDeclaredConstructor().newInstance();
@@ -50,6 +57,13 @@ public class ConversionUtils {
         result.setMetadata(from.getMetadata());
         result.setData(convert(from.getData(), toClass));
         return result;
+    }
+
+    private static ZonedDateTime convertToZonedDateTime(@Nullable Date from) {
+        if (from == null) {
+            return null;
+        }
+        return ZonedDateTime.ofInstant(Instant.ofEpochMilli(from.getTime()), ZoneOffset.UTC);
     }
 
     private static void fillAllFields(@Nonnull Object from, @Nonnull Object to) throws IllegalAccessException {
