@@ -3,12 +3,13 @@ package cat.aubricoc.xolis.common.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResult<T> {
 
-    private SearchMetadata metadata;
-    private List<T> data;
+    private SearchMetadata metadata = new SearchMetadata();
+    private List<T> data = new ArrayList<>();
 
     public SearchMetadata getMetadata() {
         return metadata;

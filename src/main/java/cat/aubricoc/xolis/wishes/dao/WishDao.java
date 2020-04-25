@@ -20,11 +20,12 @@ public class WishDao extends Dao<WishDoc> {
     }
 
     public SearchWishesResult search(WishesSearch search) {
+        boolean onlyCount = search.getLimit() == 0;
         return getCollection().aggregate(
                 Utils.mergeLists(
                         BsonUtils.prepareFilters("created", search.getCreated()),
-                        BsonUtils.prepareOneToOneJoin("userId", "users", "user"),
-                        BsonUtils.prepareSort("created"),
+                        onlyCount ? null : BsonUtils.prepareOneToOneJoin("userId", "users", "user"),
+                        onlyCount ? null : BsonUtils.prepareSort("created"),
                         BsonUtils.preparePagination(search)
                 ), SearchWishesResult.class)
                 .first();

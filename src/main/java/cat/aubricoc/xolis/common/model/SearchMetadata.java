@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class SearchMetadata {
 
-    private Integer total;
+    private Integer total = 0;
 
     public Integer getTotal() {
         return total;

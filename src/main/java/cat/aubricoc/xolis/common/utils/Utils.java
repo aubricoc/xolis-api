@@ -2,6 +2,7 @@ package cat.aubricoc.xolis.common.utils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,6 +20,7 @@ public class Utils {
     @SafeVarargs
     public static <T> List<T> mergeLists(List<T>... lists) {
         return Stream.of(lists)
+                .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }

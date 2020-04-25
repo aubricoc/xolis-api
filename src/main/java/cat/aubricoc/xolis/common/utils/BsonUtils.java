@@ -24,18 +24,26 @@ public class BsonUtils {
     }
 
     public static List<Bson> preparePagination(PaginatedSearch search) {
+        Integer limit = search.getLimit();
+        Facet totalFacet = new Facet("metadata", Aggregates.count("total"));
+        Bson facet;
+        if (limit == 0) {
+            facet = Aggregates.facet(totalFacet);
+        } else {
+            facet = Aggregates.facet(
+                    totalFacet,
+                    new Facet("data", Aggregates.skip(search.getOffset()), Aggregates.limit(limit))
+            );
+        }
         return Arrays.asList(
-                Aggregates.facet(
-                        new Facet("metadata", Aggregates.count("total")),
-                        new Facet("data", Aggregates.skip(search.getOffset()), Aggregates.limit(search.getLimit()))
-                ),
+                facet,
                 Aggregates.addFields(new Field<>("metadata", new Document("$arrayElemAt", Arrays.asList("$metadata", 0))))
         );
     }
 
     public static List<Bson> prepareSort(String... fields) {
         return Stream.of(fields)
-                .map(field -> Aggregates.sort(new Document(field, 1)))
+                .map(field -> Aggregates.sort(new Document(field, -1)))
                 .collect(Collectors.toList());
     }
 
