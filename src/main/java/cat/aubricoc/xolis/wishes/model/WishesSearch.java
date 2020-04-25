@@ -5,17 +5,18 @@ import cat.aubricoc.xolis.common.model.PaginatedSearch;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.List;
 
 public class WishesSearch extends PaginatedSearch {
 
-    private FilterWithOperator<ZonedDateTime> created;
+    private List<FilterWithOperator<Date>> created;
 
-    public FilterWithOperator<ZonedDateTime> getCreated() {
+    public List<FilterWithOperator<Date>> getCreated() {
         return created;
     }
 
-    public void setCreated(FilterWithOperator<ZonedDateTime> created) {
+    public void setCreated(List<FilterWithOperator<Date>> created) {
         this.created = created;
     }
 

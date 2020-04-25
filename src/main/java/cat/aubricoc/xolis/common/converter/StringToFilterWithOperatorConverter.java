@@ -6,6 +6,7 @@ import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.ConversionService;
 import io.micronaut.core.convert.TypeConverter;
 import io.micronaut.core.type.Argument;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -31,12 +32,12 @@ public class StringToFilterWithOperatorConverter implements TypeConverter<String
         Class<?> valueType = context.getFirstTypeVariable()
                 .map(Argument::getType)
                 .orElseThrow();
-        for (FilterOperator operator : FilterOperator.values()) {
-            String operatorText = operator.getKey() + OPERATOR_SEPARATOR;
-            if (value.startsWith(operatorText)) {
-                String valueWithoutOperator = value.substring(operatorText.length());
-                Object val = conversionService.convertRequired(valueWithoutOperator, valueType);
-                return Optional.of(new FilterWithOperator<>(operator, val));
+        String[] split = StringUtils.split(value, OPERATOR_SEPARATOR, 2);
+        if (split.length == 2) {
+            Optional<FilterOperator> operator = FilterOperator.getByKey(split[0]);
+            if (operator.isPresent()) {
+                Object val = conversionService.convertRequired(split[1], valueType);
+                return Optional.of(new FilterWithOperator<>(operator.get(), val));
             }
         }
         Object val = conversionService.convertRequired(value, valueType);

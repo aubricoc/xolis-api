@@ -10,11 +10,11 @@ public class FilterWithOperator<T> {
     private final T value;
 
     public FilterWithOperator(T value) {
-        this(FilterOperator.EQUALS, value);
+        this(null, value);
     }
 
     public FilterWithOperator(FilterOperator operator, T value) {
-        this.operator = operator;
+        this.operator = operator == null ? FilterOperator.EQUALS : operator;
         this.value = value;
     }
 

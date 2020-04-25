@@ -1,6 +1,5 @@
 package cat.aubricoc.xolis.wishes.service;
 
-import cat.aubricoc.xolis.common.model.PaginatedSearch;
 import cat.aubricoc.xolis.common.model.SearchResult;
 import cat.aubricoc.xolis.common.utils.ConversionUtils;
 import cat.aubricoc.xolis.security.service.AuthService;
@@ -9,6 +8,7 @@ import cat.aubricoc.xolis.wishes.model.SearchWishesResult;
 import cat.aubricoc.xolis.wishes.model.Wish;
 import cat.aubricoc.xolis.wishes.model.WishDoc;
 import cat.aubricoc.xolis.wishes.model.WishToCreate;
+import cat.aubricoc.xolis.wishes.model.WishesSearch;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -36,7 +36,7 @@ public class WishService {
         wishDao.create(wishDoc);
     }
 
-    public SearchResult<Wish> search(@Nonnull PaginatedSearch search) {
+    public SearchResult<Wish> search(@Nonnull WishesSearch search) {
         SearchWishesResult searchResult = wishDao.search(search);
         return ConversionUtils.convertSearchResult(searchResult, Wish.class);
     }
