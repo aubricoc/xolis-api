@@ -21,5 +21,6 @@ micronaut:
 jackson:
   serialization:
     writeDatesAsTimestamps: false
+  bean-introspection-module: true
 mongodb:
   uri: mongodb+srv://xolis-api:O7xbZ15YRrGLkDH4@camprodon-4d43e.gcp.mongodb.net/xolis?retryWrites=true&w=majority
