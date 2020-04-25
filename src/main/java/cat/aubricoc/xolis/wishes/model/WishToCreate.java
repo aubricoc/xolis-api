@@ -1,11 +1,12 @@
 package cat.aubricoc.xolis.wishes.model;
 
+import cat.aubricoc.xolis.common.model.Introspected;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotEmpty;
 
-public class WishToCreate {
+public class WishToCreate implements Introspected {
 
     @NotEmpty
     private String name;

@@ -12,14 +12,14 @@ import javax.inject.Singleton;
 import java.util.Optional;
 
 @Singleton
-public class FilterWithOperatorConverter implements TypeConverter<String, FilterWithOperator<?>> {
+public class StringToFilterWithOperatorConverter implements TypeConverter<String, FilterWithOperator<?>> {
 
     private static final String OPERATOR_SEPARATOR = ":";
 
     private final ConversionService<?> conversionService;
 
     @Inject
-    public FilterWithOperatorConverter(ConversionService<?> conversionService) {
+    public StringToFilterWithOperatorConverter(ConversionService<?> conversionService) {
         this.conversionService = conversionService;
     }
 

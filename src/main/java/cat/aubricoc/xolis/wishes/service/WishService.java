@@ -38,7 +38,7 @@ public class WishService {
 
     public SearchResult<Wish> search(@Nonnull PaginatedSearch search) {
         SearchWishesResult searchResult = wishDao.search(search);
-        return ConversionUtils.convert(searchResult, Wish.class);
+        return ConversionUtils.convertSearchResult(searchResult, Wish.class);
     }
 
     public Wish getById(@Nonnull String id) {

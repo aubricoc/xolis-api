@@ -1,9 +1,10 @@
 package cat.aubricoc.xolis.users.model;
 
+import cat.aubricoc.xolis.common.model.Introspected;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class User {
+public class User implements Introspected {
 
     private String username;
 

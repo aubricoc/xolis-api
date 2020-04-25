@@ -1,5 +1,6 @@
 package cat.aubricoc.xolis.users.model;
 
+import cat.aubricoc.xolis.common.model.Introspected;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class UserToCreate {
+public class UserToCreate implements Introspected {
 
     @NotEmpty
     @Pattern(regexp = "^[a-zA-Z0-9_]*$")

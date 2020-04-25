@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-public class PaginatedSearch implements Search {
+public class PaginatedSearch implements Introspected {
 
     private static final int DEFAULT_LIMIT = 10;
     private static final int DEFAULT_OFFSET = 0;

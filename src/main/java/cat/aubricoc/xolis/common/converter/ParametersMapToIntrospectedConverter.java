@@ -1,6 +1,6 @@
 package cat.aubricoc.xolis.common.converter;
 
-import cat.aubricoc.xolis.common.model.Search;
+import cat.aubricoc.xolis.common.model.Introspected;
 import io.micronaut.core.beans.BeanIntrospection;
 import io.micronaut.core.beans.BeanIntrospector;
 import io.micronaut.core.convert.ConversionContext;
@@ -13,12 +13,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @Singleton
-public class SearchConverter implements TypeConverter<Map<String, List<String>>, Search> {
+public class ParametersMapToIntrospectedConverter implements TypeConverter<Map<String, List<String>>, Introspected> {
 
     @Override
-    public Optional<Search> convert(Map<String, List<String>> map, Class<Search> targetType, ConversionContext context) {
-        BeanIntrospection<Search> introspection = BeanIntrospector.SHARED.getIntrospection(targetType);
-        Search object = introspection.instantiate();
+    public Optional<Introspected> convert(Map<String, List<String>> map, Class<Introspected> targetType, ConversionContext context) {
+        BeanIntrospection<Introspected> introspection = BeanIntrospector.SHARED.getIntrospection(targetType);
+        Introspected object = introspection.instantiate();
         map.forEach((name, list) -> introspection.getProperty(name).ifPresent(property -> {
             Class<Object> type = property.getType();
             if (Collection.class.isAssignableFrom(type)) {

@@ -1,12 +1,13 @@
 package cat.aubricoc.xolis.wishes.model;
 
+import cat.aubricoc.xolis.common.model.Introspected;
 import cat.aubricoc.xolis.users.model.User;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.time.ZonedDateTime;
 
-public class Wish {
+public class Wish implements Introspected {
 
     private String id;
     private String name;
